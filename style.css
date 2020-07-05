@@ -1,9 +1,5 @@
-  * {
+* {
     box-sizing: border-box;
-  }
-  
-  body{
-    margin: 0
   }
   
   .row::after {
@@ -16,8 +12,6 @@
     float: left;
     padding: 15px;
   }
-  
-
   
   html {
     font-family: "Roboto", sans-serif;
@@ -37,16 +31,6 @@
     color: #ffffff;
     padding: 2px;
     display: flex;
-    flex-wrap: wrap;
-  }
-
-  @media only screen and (max-width: 600px) {
-    .navbar {
-      justify-content: space-around;
-    }
-    .navbar-item {
-      flex-grow: 1;
-    }
   }
 
   .navbar-item {
