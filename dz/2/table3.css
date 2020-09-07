@@ -1,0 +1,15 @@
+td {
+    background: transparent;
+}
+
+.tooltip {
+    position: absolute;
+    background: #000;
+    padding: 1em;
+    color: #fff;
+    pointer-events: none;
+}
+
+.tooltip:not(.active) {
+    display: none;
+}

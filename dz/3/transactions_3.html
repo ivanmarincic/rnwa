@@ -1,0 +1,31 @@
+<html>
+<head>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        function showResults(str) {
+			var formated = "";
+			if(str && str.length == 10){
+				var day = parseInt(str.substring(0,2));
+				var month = parseInt(str.substring(3,5));
+				var year = parseInt(str.substring(6));
+				if(!isNaN(day) && !isNaN(month) && !isNaN(year)){
+					formated = year + "-" + ("0" + month).slice(-2) + "-" + ("0" + day).slice(-2);
+				}
+			}
+			axios.get("http://localhost/dz/3/transactions_search.php?s=" + str)
+			.then(function(response) {
+			document.getElementById("output").innerHTML = response.data;
+			});
+        }
+        showResults("");
+    </script>
+</head>
+<body>
+
+<form>
+    Datum: <input type="text" onkeyup="showResults(this.value)">
+</form>
+<p>Transakcije:<br> </p>
+<div id="output"></div>
+</body>
+</html>
