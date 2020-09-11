@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<definitions name="Bank" targetNamespace="urn:ProductList" xmlns:tns="urn:ProductList"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns="http://schemas.xmlsoap.org/wsdl/">
+    <types>
+        <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:Products">
+            <xsd:element name="search" type="xsd:string"/>
+
+            <xsd:complexType name='Employee'>
+                <xsd:all>
+                    <xsd:element
+                            name='FIRST_NAME'
+                            type='xsd:string'/>
+                    <xsd:element
+                            name='LAST_NAME'
+                            type='xsd:string'/>
+                    <xsd:element
+                            name='TITLE'
+                            type='xsd:string'/>
+                    <xsd:element
+                            name='DEPARTMENT'
+                            type='xsd:string'/>
+                </xsd:all>
+            </xsd:complexType>
+
+            <xsd:complexType name='Transaction'>
+                <xsd:all>
+                    <xsd:element
+                            name='FIRST_NAME'
+                            type='xsd:string'/>
+                    <xsd:element
+                            name='LAST_NAME'
+                            type='xsd:string'/>
+                    <xsd:element
+                            name='TITLE'
+                            type='xsd:string'/>
+                    <xsd:element
+                            name='DEPARTMENT'
+                            type='xsd:string'/>
+                </xsd:all>
+            </xsd:complexType>
+        </xsd:schema>
+    </types>
+
+    <message name="listEmployees">
+        <part name="q" type="tns:search"/>
+    </message>
+
+    <message name="listEmployeesResponse">
+        <part name="return" type="tns:Employee"/>
+    </message>
+
+    <message name="listTransactions">
+        <part name="q" type="tns:search"/>
+    </message>
+
+    <message name="listTransactionsResponse">
+        <part name="return" type="tns:Transaction"/>
+    </message>
+
+    <portType name="EmployeesPort">
+        <operation name="listEmployees">
+            <input message="tns:listEmployees"/>
+            <output message="tns:listEmployeesResponse"/>
+        </operation>
+    </portType>
+
+    <portType name="TransactionsPort">
+        <operation name="listTransactions">
+            <input message="tns:listTransactions"/>
+            <output message="tns:listTransactionsResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="EmployeesBinding" type="tns:EmployeesPort">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="listEmployees">
+            <soap:operation soapAction="urn:listEmployees"/>
+            <input>
+                <soap:body use="encoded" namespace="urn:Bank"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body use="encoded" namespace="urn:Bank"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+    </binding>
+
+    <binding name="TransactionsBinding" type="tns:TransactionsPort">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="listTransactions">
+            <soap:operation soapAction="urn:listTransactions"/>
+            <input>
+                <soap:body use="encoded" namespace="urn:Bank"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body use="encoded" namespace="urn:Bank"
+                           encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="BankService">
+        <port name="EmployeesPort" binding="tns:EmployeesBinding">
+            <soap:address location="http://localhost/server.php"/>
+        </port>
+        <port name="TransactionsPort" binding="tns:TransactionsBinding">
+            <soap:address location="http://localhost/server.php"/>
+        </port>
+    </service>
+
+</definitions>
